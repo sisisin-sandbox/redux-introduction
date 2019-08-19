@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
+import { IncrementButton } from './IncrimentButton';
 
+// --- definition of reducer
 interface CounterState {
   counter: number;
 }
@@ -15,18 +17,18 @@ function counter(state = initialState, action) {
   }
 }
 
-interface State {
-  counter: number;
-}
+// --- configure store
+export const store = createStore(counter);
 
-const store = createStore(counter);
-
-class App extends React.Component<any, State> {
+// Component
+class App extends React.Component<any, CounterState> {
   constructor(props) {
     super(props);
     this.state = initialState;
   }
   componentDidMount() {
+    // --- set subscription
+
     store.subscribe(() => {
       this.setState(store.getState());
     });
@@ -35,7 +37,7 @@ class App extends React.Component<any, State> {
     return (
       <div>
         <div>count: {this.state.counter}</div>
-        <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>hoge</button>
+        <IncrementButton />
       </div>
     );
   }

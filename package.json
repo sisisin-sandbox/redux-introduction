@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html",
+    "step1": "parcel src/step1/index.html",
+    "step2": "parcel src/step2/index.html",
+    "step3": "parcel src/step3/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
