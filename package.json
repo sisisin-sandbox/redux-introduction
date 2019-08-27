@@ -8,6 +8,9 @@
     "step1": "parcel src/step1/index.html",
     "step2": "parcel src/step2/index.html",
     "step3": "parcel src/step3/index.html",
+    "step4": "parcel src/step4/index.html",
+    "step5": "parcel src/step5/index.html",
+    "stepN": "parcel src/stepN/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

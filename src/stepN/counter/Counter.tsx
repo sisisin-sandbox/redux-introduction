@@ -11,7 +11,7 @@ export class Counter extends React.Component<CounterProps, never> {
     return (
       <div>
         <div>count: {this.props.counter}</div>
-        <IncrementButton increment={this.props.actions.increment} />
+        <IncrementButton increment={() => this.props.actions.increment()} />
       </div>
     );
   }
