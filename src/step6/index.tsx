@@ -22,14 +22,15 @@ function counter(state = initialState, action) {
 const createIncrementAction = () => ({ type: 'INCREMENT' });
 
 // Component
-interface CounterProps extends CounterState {
+interface CounterProps {
+  state: CounterState;
   actions: CounterActionDispatcher;
 }
 class Counter extends React.Component<CounterProps, never> {
   render() {
     return (
       <div>
-        <div>count: {this.props.counter}</div>
+        <div>count: {this.props.state.counter}</div>
         <IncrementButton increment={() => this.props.actions.increment()} />
       </div>
     );
@@ -42,9 +43,13 @@ class CounterActionDispatcher {
     this.dispatch(createIncrementAction());
   }
 }
+const mapStateToProps = (state: CounterState) => ({ state });
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  actions: new CounterActionDispatcher(dispatch),
+});
 const CounterContainer = connect(
-  (state: CounterState) => state,
-  dispatch => ({ actions: new CounterActionDispatcher(dispatch) }),
+  mapStateToProps,
+  mapDispatchToProps,
 )(Counter);
 
 // --- configure store

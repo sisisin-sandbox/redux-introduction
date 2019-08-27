@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, Dispatch } from 'redux';
 import { IncrementButton } from './IncrimentButton';
 
 // --- definition of reducer
@@ -22,29 +22,32 @@ function counter(state = initialState, action) {
 const createIncrementAction = () => ({ type: 'INCREMENT' });
 
 // Component
-interface CounterProps extends CounterState {
-  increment: () => void;
+interface CounterProps {
+  state: CounterState;
+  actions: { increment: () => void };
 }
 class Counter extends React.Component<CounterProps, never> {
   render() {
     return (
       <div>
-        <div>count: {this.props.counter}</div>
-        <IncrementButton increment={this.props.increment} />
+        <div>count: {this.props.state.counter}</div>
+        <IncrementButton increment={this.props.actions.increment} />
       </div>
     );
   }
 }
 
-const CounterContainer = connect(
-  (state: CounterState) => state,
-  dispatch => {
-    return {
-      increment() {
-        dispatch(createIncrementAction());
-      },
-    };
+const mapStateToProps = (state: CounterState) => ({ state });
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  actions: {
+    increment() {
+      dispatch(createIncrementAction());
+    },
   },
+});
+const CounterContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
 )(Counter);
 
 // --- configure store
