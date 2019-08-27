@@ -1,11 +1,11 @@
 import { Dispatch } from 'react';
 import { Action } from 'redux';
-import { increment } from './Reducer';
+import { increment as createIncrementAction } from './Reducer';
 
 export class CounterActionDispatcher {
   constructor(private dispatch: Dispatch<Action>) {}
 
   increment() {
-    this.dispatch(increment());
+    this.dispatch(createIncrementAction());
   }
 }

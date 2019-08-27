@@ -3,7 +3,7 @@
 ## この資料について
 
 社内でとあるチームより自チームのReduxアーキテクチャを理解したいという声があったのでこさえました  
-アーキテクチャはuryyyyyyyさんが作ったもので、本人による[解説記事](https://qiita.com/uryyyyyyy/items/1f2022bbf914d65d635a)もあるので、そちらもちょこちょこ参照します  
+アーキテクチャは uryyyyyyy さんが作ったもので、本人による[解説記事](https://qiita.com/uryyyyyyy/items/1f2022bbf914d65d635a)もあるので、そちらもちょこちょこ参照します  
 
 構成としては、 `src/` 配下に `step1` ~ `stepN` のフォルダを作ってあり、stepごとに少しずつReduxを触っていく形になっています  
 
@@ -77,4 +77,18 @@ storeの依存をなるべく上流のComponentに集約させ、下流のCompon
 このconnect関数を使うことでreduxの持つ `state` 及び `dispatch` 関数がComponentとキレイに分離されます  
 
 段々と見たことある形に近づいてきましたね  
+
+## step6
+
+uryyyyyyy流ではReduxのmiddlewareを使いません。  
+そのため、アプリケーションの主要なロジックはほぼ `dispatch` の前に記述されています。  
+reducerを純粋関数に保つために、非同期処理などは事前に済ませた上でActionを発火する、という作りになっているのですね。  
+  
+その処理を担う `ActionDispatcher` クラスを作ります。  
+これはその名の通り、 `Action` を `Dispatch` する役割のクラスです。  
+Componentはこのクラスのメソッドを叩くことでActionをDispatchします。  
+
+## stepN
+
+最後にファイルを分割しておしまい。
 

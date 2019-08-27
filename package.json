@@ -10,6 +10,7 @@
     "step3": "parcel src/step3/index.html",
     "step4": "parcel src/step4/index.html",
     "step5": "parcel src/step5/index.html",
+    "step6": "parcel src/step6/index.html",
     "stepN": "parcel src/stepN/index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
